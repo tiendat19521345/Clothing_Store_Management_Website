@@ -19,3 +19,21 @@ router.get("/list", async (req, res) => {
     res.status(500).send("Bad server");
   }
 });
+router.get("/:id", async function (req, res) {
+  console.log(req.params.id);
+  var order = await Order.findById(req.params.id)
+    .populate("customer", "name phone point")
+    .populate({
+      path: "orderDetails",
+      populate: {
+        path: "product",
+        select: "name saleprice imageDisplay salePrice",
+      },
+    });
+
+  if (order) {
+    res.status(200).send(order);
+  } else {
+    res.status(500).send("Lỗi server");
+  }
+});
