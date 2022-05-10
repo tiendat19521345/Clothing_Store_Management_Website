@@ -16,7 +16,8 @@ const Dashboard = () => {
   const [top1Customer, setTop1Customer] = useState({});
   const [totalCustomerThisWeek, setTotalCustomerThisWeek] = useState();
   const [totalCustomerLastWeek, setTotalCustomerLastWeek] = useState();
-
+  const [topProductByRevenue, setTopProductByRevenue] = useState();
+  const [topProductByQuantity, setTopProductByQuantity] = useState();
   useEffect(() => {
     axios
       .get(
@@ -45,6 +46,86 @@ const Dashboard = () => {
       });
   }, []);
   //get top 1 customer
+  useEffect(() => {
+    axios
+      .get(
+        "https://clothesapp123.herokuapp.com/api/customers/getTopCustomerByPoint/1"
+      )
+      .then((res) => {
+        setTop1Customer({
+          name: res.data[0]?.name,
+          phone: res.data[0]?.phone,
+          point: res.data[0]?.point,
+        });
+      });
+  }, []);
+  //get customer this week
+  useEffect(() => {
+    axios
+      .get(
+        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTotalCustomerByThisWeek"
+      )
+      .then((res) => {
+        const customerThisWeekDataSets = [0, 0, 0, 0, 0, 0, 0];
+        // console.log({ customerThisWeekDataSets });
+        res.data.forEach((item) => {
+          // console.log(item);
+          const indexDate = new Date(item.dateOrder).getDay();
+          if (indexDate !== 0) {
+            customerThisWeekDataSets[indexDate - 1] += 1;
+          } else {
+            customerThisWeekDataSets[6] += 1;
+          }
+        });
+        setTotalCustomerThisWeek((prev) => {
+          return [...customerThisWeekDataSets];
+        });
+      });
+  }, []);
+
+  //console.log({ totalCustomerThisWeek });
+  //get customer last week
+  useEffect(() => {
+    axios
+      .get(
+        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTotalCustomerByLastWeek"
+      )
+      .then((res) => {
+        const customerLastWeekDataSets = [0, 0, 0, 0, 0, 0, 0];
+        res.data.forEach((item) => {
+          const indexDate = new Date(item.dateOrder).getDay();
+          if (indexDate !== 0) {
+            customerLastWeekDataSets[indexDate - 1] += 1;
+          } else {
+            customerLastWeekDataSets[6] += 1;
+          }
+        });
+        setTotalCustomerLastWeek((prev) => {
+          return [...customerLastWeekDataSets];
+        });
+      });
+  }, []);
+  console.log("run");
+  //get top product by renvenue
+  useEffect(() => {
+    axios
+      .get(
+        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTopProductByRevenue/6"
+      )
+      .then((res) => {
+        setTopProductByRevenue(res.data);
+      });
+  }, []);
+  //get top product by quantity
+  useEffect(() => {
+    axios
+      .get(
+        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTopProductByQuantity/6"
+      )
+      .then((res) => {
+        setTopProductByQuantity(res.data);
+      });
+  }, []);
 
   const dataCustomer = {
     labels: [
@@ -68,6 +149,21 @@ const Dashboard = () => {
         data: totalCustomerThisWeek,
         borderColor: "rgb(53, 162, 235)",
         backgroundColor: "rgba(53, 162, 235, 0.5)",
+      },
+    ],
+  };
+  const dataClothes = {
+    labels: topProductByQuantity?.map((value) => {
+      return value.productName;
+    }),
+    datasets: [
+      {
+        data: topProductByQuantity?.map((value) => {
+          return value.count;
+        }),
+        backgroundColor: "#62B4FF",
+        borderColor: "#62B4FF",
+        borderWidth: 1,
       },
     ],
   };
