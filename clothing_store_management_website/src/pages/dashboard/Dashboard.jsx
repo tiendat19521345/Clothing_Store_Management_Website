@@ -152,6 +152,7 @@ const Dashboard = () => {
       },
     ],
   };
+
   const dataClothes = {
     labels: topProductByQuantity?.map((value) => {
       return value.productName;
@@ -167,8 +168,6 @@ const Dashboard = () => {
       },
     ],
   };
-
-
   return (
     <div>
       <h2 className="header-title">Tổng quan</h2>
@@ -292,8 +291,52 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-
-
+      {/**table dashboard */}
+      <div className="table-dashboard-container">
+        <div class="card">
+          <div class="card-header">
+            <h3>Top 6 sản phẩm có doanh thu cao nhất trong ngày</h3>
+          </div>
+          <div class="card-content">
+            <table id="dashboard-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Mã sản phẩm</th>
+                  <th>Tên sản phẩm</th>
+                  <th>Giá bán</th>
+                  <th>Số lượng bán</th>
+                  <th>Doanh thu</th>
+                </tr>
+              </thead>
+              <tbody>
+                {topProductByRevenue?.map((product, index) => {
+                  return (
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{product._id.substr(product._id.length - 9)}</td>
+                      <td>{product.productName}</td>
+                      <td>{`${product.salePrice.toLocaleString("en")}đ`}</td>
+                      <td>{product.count.toLocaleString("en")}</td>
+                      <td>{`${product.totalSalePrice.toLocaleString(
+                        "en"
+                      )}đ`}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      {/**end table dashboard */}
+      <div className="dashboard-chart">
+        {/* <BarChart
+          title="Top 6 sản phẩm bán chạy theo số lượng "
+          data={dataClothes}
+          horizontal
+        /> */}
+      </div>
     </div>
   );
 };
