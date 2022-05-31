@@ -1,0 +1,16 @@
+.form {
+  background-color: #62b4ff;
+  width: 80%;
+  padding: 30px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+}
+.return-detail-heading {
+  padding: 30px;
+}
+.return-detail-heading > p {
+  padding-bottom: 5px;
+}
+.css-1q1u3t4-MuiTableRow-root {
+  cursor: pointer;
+}
