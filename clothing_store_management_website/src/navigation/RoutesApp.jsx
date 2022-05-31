@@ -8,11 +8,19 @@ const RoutesApp = () => {
   const [isAuticated, setIsAuticated] = useState(false);
   return (
     <Switch>
-
-      <Route path="/home">
-        <Layout />
+      <Route path="/login">
+        <Login setIsAuticated={setIsAuticated} />
       </Route>
 
+      {isAuticated && (
+        <Route path="/home">
+          <Layout />
+        </Route>
+      )}
+
+      <Route path="/">
+        <Redirect to="/login" />
+      </Route>
     </Switch>
   );
 };
