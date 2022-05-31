@@ -14,7 +14,7 @@ import Paper from "@mui/material/Paper";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
 
-import "./returndetail.css";
+import "./ReturnDetail.css";
 import axios from "axios";
 
 const headCells = [

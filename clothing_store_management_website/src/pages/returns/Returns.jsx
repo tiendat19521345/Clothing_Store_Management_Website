@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import "./returns.css";
+import "./Returns.css";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -15,7 +15,7 @@ import ModalUnstyled from "@mui/core/ModalUnstyled";
 import TextField from "@mui/material/TextField";
 import { styled, Box } from "@mui/system";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import ReturnOrder from "./returnorder/ReturnOrder";
+import ReturnOrder from "./return_order/ReturnOrder";
 import axios from "axios";
 import moment from "moment";
 const columns = [

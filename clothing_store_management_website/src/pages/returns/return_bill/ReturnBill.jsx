@@ -4,25 +4,26 @@ import { useReactToPrint } from "react-to-print";
 import { useLocation, useHistory } from "react-router-dom";
 import QRCode from "qrcode";
 import axios from "axios";
-import { Alert } from "react-bootstrap";
+import "./ReturnBill.css";
 const ReturnBill = () => {
   let history = useHistory();
   let location = useLocation();
-  const returnOrder = location.state.returnOrder;
+  const returnOrder = location?.state?.returnOrder;
   const [returnOrderId, setReturnOrderId] = useState("");
   const [qrImage, setQrImage] = useState("");
   console.log(returnOrder);
   useEffect(() => {
-    QRCode.toDataURL(
-      JSON.stringify({
-        orderTotal: returnOrder.order.orderId,
-        customer: returnOrder.customer.name,
-        point: returnOrder.point,
-        totalReturnPrice: returnOrder.totalReturnPrice,
-      })
-    ).then((url) => {
-      setQrImage(url);
-    });
+    returnOrder &&
+      QRCode.toDataURL(
+        JSON.stringify({
+          orderTotal: returnOrder.order.orderId,
+          customer: returnOrder.customer.name,
+          point: returnOrder.point,
+          totalReturnPrice: returnOrder.totalReturnPrice,
+        })
+      ).then((url) => {
+        setQrImage(url);
+      });
   }, []);
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -88,9 +89,9 @@ const ReturnBill = () => {
             <img src={qrImage} alt="" />
           </div>
           <div className="invoice-info-p">
-            <p>Khách hàng: {returnOrder.customer.name || "Khách lẻ"} </p>
-            <p>Số điện thoại: {returnOrder.customer.phone || "Không có"} </p>
-            <p>Nhân viên bán hàng: {returnOrder.user.fullname} </p>
+            <p>Khách hàng: {returnOrder?.customer.name || "Khách lẻ"} </p>
+            <p>Số điện thoại: {returnOrder?.customer.phone || "Không có"} </p>
+            <p>Nhân viên bán hàng: {returnOrder?.user.fullname} </p>
           </div>
         </div>
       </div>
@@ -106,24 +107,25 @@ const ReturnBill = () => {
             </tr>
           </thead>
           <tbody>
-            {returnOrder.orderDetails.map((orderItem, index) => {
-              if (orderItem.returnedQuantity) {
-                return (
-                  <tr>
-                    <td>{index + 1}</td>
-                    <td>{orderItem.product.name}</td>
+            {returnOrder &&
+              returnOrder.orderDetails?.map((orderItem, index) => {
+                if (orderItem.returnedQuantity) {
+                  return (
+                    <tr>
+                      <td>{index + 1}</td>
+                      <td>{orderItem.product.name}</td>
 
-                    <td>{`${orderItem.product.salePrice.toLocaleString(
-                      "en"
-                    )}đ`}</td>
-                    <td>{orderItem.returnedQuantity}</td>
-                    <td>{`${(
-                      orderItem.product.salePrice * orderItem.returnedQuantity
-                    ).toLocaleString("en")}đ`}</td>
-                  </tr>
-                );
-              }
-            })}
+                      <td>{`${orderItem.product.salePrice.toLocaleString(
+                        "en"
+                      )}đ`}</td>
+                      <td>{orderItem.returnedQuantity}</td>
+                      <td>{`${(
+                        orderItem.product.salePrice * orderItem.returnedQuantity
+                      ).toLocaleString("en")}đ`}</td>
+                    </tr>
+                  );
+                }
+              })}
           </tbody>
         </table>
       </div>
@@ -134,16 +136,16 @@ const ReturnBill = () => {
           </p>
         </div>
         <div className="table-footer-right">
-          <p>{`Tổng tiền hoàn trả ${returnOrder.returnTempPrice.toLocaleString(
+          <p>{`Tổng tiền hoàn trả ${returnOrder?.returnTempPrice.toLocaleString(
             "en"
           )}đ`}</p>
 
-          {returnOrder.returnFee > 0 && (
-            <p>{`Phí trả hàng: ${returnOrder.returnFee.toLocaleString(
+          {returnOrder?.returnFee > 0 && (
+            <p>{`Phí trả hàng: ${returnOrder?.returnFee.toLocaleString(
               "en"
             )}đ`}</p>
           )}
-          <b>{`Tiền trả khách: ${returnOrder.totalReturnPrice?.toLocaleString(
+          <b>{`Tiền trả khách: ${returnOrder?.totalReturnPrice?.toLocaleString(
             "en"
           )}đ`}</b>
         </div>
@@ -161,7 +163,7 @@ const ReturnBill = () => {
         <button
           onClick={() => {
             history.push("/returnOrderDetail", {
-              orderId: returnOrder.order.orderId,
+              orderId: returnOrder?.order.orderId,
             });
           }}
           className="invoice-confirm-cancel"

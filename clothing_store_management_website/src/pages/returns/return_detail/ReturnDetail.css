@@ -14,3 +14,25 @@
 .css-1q1u3t4-MuiTableRow-root {
   cursor: pointer;
 }
+.group-count {
+  display: flex;
+  margin-right: 15px;
+}
+.group-count-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 30px;
+  border: 1px solid rgb(236, 236, 236);
+}
+.group-count-item > input {
+  width: 100%;
+  text-align: center;
+}
+.group-count-item:first-child {
+  border-right: none;
+}
+.group-count-item:last-child {
+  border-left: 0;
+}
