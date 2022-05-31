@@ -1,0 +1,82 @@
+.returns {
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonDoiTra {
+  color: white;
+  background-color: #62b4ff;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 14px;
+  display: flex;
+  cursor: default;
+}
+.returns_header {
+  z-index: 10;
+  width: 100%;
+  height: 60px;
+  /* border: 1px solid #a19b9b; */
+
+  /* background-color: #fff; */
+  margin-top: -40px;
+  margin-left: -20px;
+  position: fixed;
+  /* top: 100px; */
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #62b4ff;
+}
+.returns_search {
+  width: 300px;
+  height: 35px;
+  margin: 17px;
+  background-color: var(--main-bg);
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  border: 1px solid #67dbdb;
+  justify-content: space-between;
+}
+.returns_search > input {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  padding: 10px 60px 10px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  color: var(--txt-color);
+}
+.returns_search > i {
+  font-size: 1.5rem;
+  position: absolute;
+  right: 20px;
+}
+.returns_datepicker {
+  margin-left: 35px;
+}
+.returns_action {
+  margin-left: 65px;
+}
+.returns_action_btn {
+  background-color: #fff;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.returns_action_btn > i {
+  margin-right: 5px;
+}
+.returns_body {
+  z-index: 5;
+  padding-top: 40px;
+}
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-error
+  .MuiOutlinedInput-notchedOutline {
+  border-color: blue !important;
+}

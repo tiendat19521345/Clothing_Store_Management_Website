@@ -1,0 +1,135 @@
+.return-order-detail-container-heading {
+  margin-top: -25px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-right: 340px;
+}
+
+.return-order-detail-btn-exit {
+  font-weight: bold;
+  padding: 10px 20px;
+  color: #fff;
+  border-radius: 5px;
+  background-color: rgb(3, 169, 244);
+  margin-right: 10px;
+}
+
+.return-order-detail-container-body {
+  display: flex;
+}
+.return-order-detail-container-body-left {
+  width: 70%;
+
+  overflow-y: auto;
+}
+
+.return-order-detail-container-body-right {
+  width: 30%;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.return-order-detail-container-body-left-list {
+  width: 100%;
+
+  background-color: #fff;
+  padding: 10px;
+}
+.return-order-detail-card {
+  position: relative;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+}
+.return-order-detail-delete-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 17px;
+  cursor: pointer;
+}
+.return-order-detail-card-left {
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.return-order-detail-card-left-img {
+  width: 100%;
+  height: 80px;
+  margin-right: 10px;
+}
+.return-order-detail-card-left-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.return-order-detail-card-middle {
+  width: 55%;
+}
+.return-order-detail-card-middle > b {
+  padding: 5px;
+  font-size: 15px;
+}
+.return-order-detail-card-middle > p {
+  padding: 5px;
+  font-size: 15px;
+}
+.return-order-detail-card-right {
+  width: 25%;
+  display: flex;
+}
+.return-order-detail-card-middle-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.return-order-detail-counts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.refund-payment-card {
+  width: 320px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+.refund-payment-card:first-child {
+  margin-bottom: 30px;
+}
+.refund-payment-row {
+  padding: 10px;
+}
+.return-order-detail-card-price {
+  display: inline-flex;
+}
+.refund-payment-btn {
+  background: rgb(255, 66, 78);
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  color: #fff;
+  font-weight: bold;
+  margin: 0 20px;
+  margin-top: 20px;
+
+  font-size: 18px;
+}
+.refund-payment-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.refund-payment-row > input {
+  width: 100px;
+
+  border-bottom: 1px solid #ccc;
+}

@@ -1,0 +1,150 @@
+.return-order-container {
+  position: relative;
+  padding: 30px;
+  margin: 20px 90px;
+  border-radius: 15px;
+  background-color: #fff;
+}
+.return-order-btn-exit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.return-order-header {
+  text-align: center;
+  font-size: 21px;
+}
+.return-order-body {
+  margin-top: 10px;
+  display: flex;
+}
+.return-order-body-left {
+  padding: 20px;
+}
+.return-order-card {
+  padding: 20px;
+  box-shadow: 0 2px 15px rgb(0 0 0 / 15%);
+  border-radius: 5px;
+  background-color: #fff;
+}
+.return-order-card:first-child {
+  margin-bottom: 30px;
+}
+.return-order-card-heading {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+.return-order-card-input {
+  font-size: 15px;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid #bfbfbf;
+}
+.return-order-card-date-picker {
+  border-bottom: 1px solid #bfbfbf;
+  padding: 0px 0;
+  margin-bottom: 10px;
+}
+.return-order-table-container {
+  margin-top: 30px;
+  padding-right: 20px;
+}
+#return-order-table {
+  border-collapse: collapse;
+  width: 100%;
+  max-height: 300px;
+  table-layout: fixed;
+  border: 1px solid #ccc;
+}
+
+#return-order-table th,
+#return-order-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px;
+  user-select: none;
+}
+#return-order-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+#return-order-table tr:hover {
+  background-color: rgb(3, 169, 244);
+}
+
+#return-order-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(3, 169, 244);
+  color: white;
+  border: 1px solid rgb(3, 169, 244);
+}
+.return-order-table-btn-select {
+  padding: 5px 10px;
+  background: rgb(255, 66, 78);
+  border: 1px solid rgb(255, 66, 78);
+  cursor: pointer;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+}
+#return-order-table td:first-child,
+#return-order-table th:first-child {
+  width: 130px;
+}
+#return-order-table td:nth-child(2),
+#return-order-table th:nth-child(2) {
+  width: 130px;
+}
+#return-order-table td:nth-child(3),
+#return-order-table th:nth-child(3) {
+  width: 130px;
+}
+#return-order-table td:nth-child(4),
+#return-order-table th:nth-child(4) {
+  width: 230px;
+}
+#return-order-table td:nth-child(5),
+#return-order-table th:nth-child(5) {
+  width: 150px;
+}
+.pagination {
+  font-size: 14px;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+}
+.pagination-left {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+.cell {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background-color: #c4c4c4;
+  margin-right: 10px;
+  font-size: 14px;
+  color: #000;
+  user-select: none;
+}
+.cell.active {
+  background-color: #00b9f2;
+
+  font-weight: bold;
+}
+@media print {
+  .invoice-confirm-row {
+    display: none;
+  }
+}
+.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root.Mui-error {
+  color: #000 !important;
+}
