@@ -19,6 +19,19 @@ app.use(cors());
 
 app.get("/", (req, res) => res.send("Hello from homepage"));
 
+var userRouter = require("./router/userRouter");
+app.use("/api/users", userRouter);
+
+var customerRouter = require("./router/customerRouter");
+app.use("/api/customers", customerRouter);
+
+var orderRouter = require("./router/orderRouter");
+app.use("/api/orders", orderRouter);
+
+var returnOrder = require("./router/returnOrderRouter");
+app.use("/api/returnOrder", returnOrder);
+var productRouter = require("./router/productRouter");
+app.use("/api/products", productRouter);
 mongoose
   .connect(process.env.conectionString, {
     useNewUrlParser: true,
