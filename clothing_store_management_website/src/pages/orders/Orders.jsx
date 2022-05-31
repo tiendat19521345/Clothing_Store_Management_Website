@@ -4,14 +4,14 @@ import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DatePicker from "@mui/lab/DatePicker";
-import "./orders.css";
+import "./Orders.css";
 import Checkbox from "@mui/material/Checkbox";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { styled } from "@mui/system";
-import OrderDetail from "./OrderDetail/OrderDetail";
+import OrderDetail from "./orderdetail/OrderDetail";
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;
