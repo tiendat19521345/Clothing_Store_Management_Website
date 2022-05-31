@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Dashboard from "../pages/dashboard/Dashboard";
 import Customers from "../pages/customers/Customers";
 import Orders from "../pages/orders/Orders";
+import OrderDetail from "../pages/orders/orderdetail/OrderDetail";
 
 const RoutesLayout = () => {
   return (
@@ -12,6 +13,9 @@ const RoutesLayout = () => {
       </Route>
       <Route path="/orders">
         <Orders></Orders>
+      </Route>
+      <Route path="/orderDetail">
+        <OrderDetail></OrderDetail>
       </Route>
       <Route path="/">
         <Dashboard></Dashboard>

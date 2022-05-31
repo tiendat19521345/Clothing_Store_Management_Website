@@ -121,6 +121,35 @@
 #order-table th:nth-child(6) {
   width: 140px;
 }
+.pagination {
+  font-size: 14px;
+  margin-top: 25px;
+  display: flex;
+  align-items: center;
+}
+.pagination-left {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+.cell {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  background-color: #c4c4c4;
+  margin-right: 10px;
+  font-size: 14px;
+  color: #000;
+  user-select: none;
+}
+.cell.active {
+  background-color: #00b9f2;
+
+  font-weight: bold;
+}
 @keyframes fade-in-ani {
   from {
     opacity: 0;
