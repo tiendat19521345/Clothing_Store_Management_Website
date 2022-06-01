@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import AddCustomer from "./AddCustomer/AddCustomer";
 import axios from "axios";
 import ComboBox from "../../components/combobox/Combobox";
 import { Link } from "react-router-dom";
-import QrReader from "react-qr-reader";
+import { QrReader } from 'react-qr-reader';
 import "./sales.css";
 import NumberFormat from "react-number-format";
 const Sales = () => {

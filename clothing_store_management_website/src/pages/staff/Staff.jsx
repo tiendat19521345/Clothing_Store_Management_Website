@@ -10,11 +10,13 @@ import TableRow from "@mui/material/TableRow";
 import Checkbox from "@mui/material/Checkbox";
 import Dialog from "../../components/dialog/Dialog";
 import axios from "axios";
-import { styled, Box } from "@mui/system";
+import "./staff.css";
+
 import ModalUnstyled from "@mui/core/ModalUnstyled";
-import "./Staffs.css";
 import AddStaff from "./AddStaff";
 import UpdateStaff from "./UpdateStaff";
+//import UpdateStaff from "./UpdateStaff/UpdateStaff";
+import { styled, Box } from "@mui/system";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -60,7 +62,7 @@ const columns = [
   },
 ];
 
-const Staffs = (props) => {
+const Staff = (props) => {
   const [staffs, setStaffs] = useState([]);
   const [originStaffs, setOriginStaff] = useState([]);
   const [position, setPosition] = useState();
@@ -70,10 +72,49 @@ const Staffs = (props) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [textSearch, setTextSearch] = useState("");
+
   const [showDialogDelete, setShowDialogDelete] = useState(false);
+  useEffect(() => {
+    axios
+      .get("https://clothesapp123.herokuapp.com/api/users")
+      .then((res) => {
+        setStaffs(res.data);
+        setOriginStaff(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  }, [showFormAddStaff, showFormUpdateStaff, selectedStaff]);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
+  };
+  useEffect(() => {
+    if (!textSearch) {
+      getAllStaff();
+    }
+    const staffFilter = originStaffs.filter((staff) => {
+      //Name: Ho Quang Linh
+      // textSearch: Quang
+
+      return (
+        staff.fullname.toLowerCase().indexOf(textSearch.toLowerCase()) > -1 ||
+        staff._id.toLowerCase().indexOf(textSearch.toLowerCase()) > -1 ||
+        staff.phone.indexOf(textSearch) > -1
+      );
+    });
+
+    setStaffs(staffFilter);
+  }, [textSearch, originStaffs]);
+  const getAllStaff = () => {
+    axios
+      .get("https://clothesapp123.herokuapp.com/api/users")
+      .then((res) => {
+        setStaffs(res.data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
   };
 
   const handleChangeRowsPerPage = (event) => {
@@ -81,14 +122,44 @@ const Staffs = (props) => {
     setPage(0);
   };
 
+  //filter staffs by position
+  useEffect(() => {
+    axios
+      .get("https://clothesapp123.herokuapp.com/api/users/getUserByPosition", {
+        params: {
+          position: position,
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        setStaffs(res.data);
+      })
+      .catch((err) => {
+        alert("lỗi");
+      });
+  }, [position]);
+
   const handleCloseDialog = () => {
     setShowDialogDelete(false);
   };
-
   const handleDeleteStaff = () => {
-
+    axios
+      .delete(
+        `https://clothesapp123.herokuapp.com/api/users/deleteOnebyId/${selectedStaff._id}`
+      )
+      .then((res) => {
+        handleCloseDialog();
+        alert("Xoá nhân thành công");
+        setSelectedStaff(null);
+      })
+      .catch(() => {
+        alert("Lỗi xin bạn hãy thử lại sau");
+        handleCloseDialog();
+      });
   };
-
   return (
     <div className="div_staff">
       <Dialog
@@ -271,7 +342,7 @@ const Staffs = (props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Staffs
+export default Staff;
