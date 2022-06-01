@@ -41,7 +41,25 @@ const AddStaff = ({ setShowFormAddStaff }) => {
     formStaff.append("image", avatar);
 
     //post to API
-    
+    axios
+      .post(
+        "https://clothesapp123.herokuapp.com/api/users/register",
+        formStaff,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
+        { timeout: 1000 }
+      )
+      .then((res) => {
+        alert("Thêm nhân viên thành công");
+        setShowFormAddStaff(false);
+      })
+      .catch((err) => {
+        alert("Thêm nhân viên thất bại");
+      });
   };
   const { handleChange, handleChangeBirthday, handleSubmit, errors } =
     useFormStaff(submitForm, staff, setStaff, validateStaff);

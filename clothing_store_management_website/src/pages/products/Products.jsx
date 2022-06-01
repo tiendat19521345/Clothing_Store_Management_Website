@@ -1,12 +1,44 @@
-import React, { useState, useEffect, useRef } from 'react'
-import {
-  Paper, Table, TableBody, TableCell, TableContainer,
-  TableHead, TablePagination, TableRow
-} from "@mui/material";
-import './Products.css'
-import ProductsNavbar from './navbar/ProductsNavbar';
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState, useRef } from "react";
+import ProductsNavbar from "./navbar/ProductsNavbar";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TablePagination from "@mui/material/TablePagination";
+import TableRow from "@mui/material/TableRow";
+import axios from "axios";
+import "./Products.css";
+
+import ModalUnstyled from "@mui/core/ModalUnstyled";
+import { styled } from "@mui/system";
+import UpdateProduct from "./updateProduct/UpdateProduct";
+import Dialog from "../../components/dialog/Dialog";
+import { Link } from "react-router-dom";
 import { useReactToPrint } from "react-to-print";
+const StyledModal = styled(ModalUnstyled)`
+  position: fixed;
+  z-index: 1300;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const Backdrop = styled("div")`
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
+`;
 
 const columns = [
   { id: "_id", label: "Mã sản phẩm" },
@@ -31,27 +63,145 @@ const columns = [
   },
 ];
 
-
 const Products = () => {
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
   });
-  const [searchText, setSearchText] = useState("");
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(6);
+  const [products, setProducts] = useState([]);
+  const [originProducts, setOriginProducts] = useState([]);
+  const [rerenderProducts, setRerenderProducts] = useState(false);
   const [shirts, setShirts] = useState([]);
   const [trousers, setTrousers] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(6);
+  const [searchText, setSearchText] = useState("");
   const [selectedProduct, setSelectedProduct] = useState("");
   const [showFormUpdateProduct, setShowFormUpdateProduct] = useState(false);
   const [showDialogDelete, setShowDialogDelete] = useState(false);
-  const [rerenderProducts, setRerenderProducts] = useState(false);
+  //get product from API
+  useEffect(() => {
+    axios
+      .get("https://clothesapp123.herokuapp.com/api/products/listProduct")
+      .then((res) => {
+        setProducts(res.data);
+        setOriginProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err.res);
+      });
+  }, [showFormUpdateProduct, selectedProduct, rerenderProducts]);
 
-  const handleFilterProductsByCategory = (e) => {
-
+  //get All products
+  const getAllProducts = () => {
+    axios
+      .get("https://clothesapp123.herokuapp.com/api/products/listProduct")
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err.res);
+      });
+  };
+  //find product by id or by name
+  const searchProduct = () => {
+    if (!searchText || !products) {
+      getAllProducts();
+    }
+    const productFilter = products.filter((product) => {
+      return (
+        product.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
+        product._id.toLowerCase().indexOf(searchText) > -1
+      );
+    });
+    setProducts(productFilter);
   };
 
+  //filter product by shirts
+
+  useEffect(() => {
+    axios
+      .get("https://clothesapp123.herokuapp.com/api/products/listCategory", {
+        params: {
+          name: "Áo",
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        setShirts(res.data);
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response.data);
+        }
+      });
+  }, []);
+
+  //filter product by trousers
+
+  useEffect(() => {
+    axios
+      .get("https://clothesapp123.herokuapp.com/api/products/listCategory", {
+        params: {
+          name: "Quần",
+        },
+        headers: {
+          "Content-Type": "multipart/form-data",
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((res) => {
+        setTrousers(res.data);
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response.data);
+        }
+      });
+  }, []);
+  //search product
+  useEffect(() => {
+    if (!searchText || !products) {
+      getAllProducts();
+    }
+    const productFilter = originProducts.filter((product) => {
+      return (
+        product.name.toLowerCase().indexOf(searchText.toLowerCase()) > -1 ||
+        product._id.toLowerCase().indexOf(searchText) > -1
+      );
+    });
+    setProducts(productFilter);
+  }, [searchText]);
+
+  //filter products by category
+  const handleFilterProductsByCategory = (e) => {
+    axios
+      .get(
+        "https://clothesapp123.herokuapp.com/api/products/productByCategory",
+        {
+          params: {
+            category: e.target.value,
+          },
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+      .then((res) => {
+        setProducts(res.data[0].productList);
+      })
+      .catch((err) => {
+        console.log("lỗi filter");
+      });
+  };
+  const handleCloseDialog = () => {
+    setShowDialogDelete(false);
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -60,9 +210,42 @@ const Products = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const handleDeleteProduct = () => {
+    axios
+      .delete(
+        `https://clothesapp123.herokuapp.com/api/products/deleteOnebyId/${selectedProduct._id}`
+      )
+      .then((res) => {
+        handleCloseDialog();
+        alert("Xoá sản phẩm thành công");
+        setSelectedProduct(null);
+      })
+      .catch("Lỗi, xin hãy thử lại sau");
+  };
   return (
-    <div className='div_products'>
+    <div className="div_product">
+      <Dialog
+        title="Xoá sản phẩm"
+        content={`Bạn có muốn xoá sản phẩm: ${selectedProduct?.name} `}
+        open={showDialogDelete}
+        handleCancel={handleCloseDialog}
+        handleAction={handleDeleteProduct}
+      />
+      <StyledModal
+        aria-labelledby="unstyled-modal-title"
+        aria-describedby="unstyled-modal-description"
+        open={showFormUpdateProduct}
+        onClose={() => {
+          setShowFormUpdateProduct(false);
+        }}
+        BackdropComponent={Backdrop}
+      >
+        <UpdateProduct
+          product={selectedProduct}
+          setShowFormUpdateProduct={setShowFormUpdateProduct}
+          setProduct={setSelectedProduct}
+        />
+      </StyledModal>
       <div className="div_left">
         <div className="clothes-category-card">
           <div className="div_search">
@@ -238,13 +421,14 @@ const Products = () => {
             />
           </Paper>
         </div>
+
         <ProductsNavbar
           handlePrint={handlePrint}
           setRerenderProducts={setRerenderProducts}
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Products
+export default Products;

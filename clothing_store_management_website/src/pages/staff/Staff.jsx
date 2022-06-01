@@ -15,7 +15,6 @@ import "./staff.css";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import AddStaff from "./AddStaff";
 import UpdateStaff from "./UpdateStaff";
-//import UpdateStaff from "./UpdateStaff/UpdateStaff";
 import { styled, Box } from "@mui/system";
 
 const StyledModal = styled(ModalUnstyled)`
