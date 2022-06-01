@@ -11,7 +11,7 @@ import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 
 import { styled } from "@mui/system";
-import OrderDetail from "./orderdetail/OrderDetail";
+import OrderDetail from "./OrderDetail/OrderDetail";
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
   z-index: 1300;

@@ -330,7 +330,13 @@ const Dashboard = () => {
         </div>
       </div>
       {/**end table dashboard */}
-
+      <div className="dashboard-chart">
+        <BarChart
+          title="Top 6 sản phẩm bán chạy theo số lượng "
+          data={dataClothes}
+          horizontal
+        />
+      </div>
     </div>
   );
 };
