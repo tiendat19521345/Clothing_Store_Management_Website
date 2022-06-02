@@ -6,14 +6,14 @@ import Sales from "../pages/sales/Sales";
 import Products from "../pages/products/Products";
 import Orders from "../pages/orders/Orders";
 import Staff from "../pages/staff/Staff";
-// import Revenues from "../pages/revenues/Revenues";
+import Revenues from "../pages/revenues/Revenues";
 import Returns from "../pages/returns/Returns";
 import Checkout from "../pages/sales/checkout/Checkout";
 import ReturnOrderDetail from "../pages/returns/return_order_detail/ReturnOrderDetail";
 import ReturnBill from "../pages/returns/return_bill/ReturnBill";
 import OrderDetail from "../pages/orders/orderdetail/OrderDetail";
-// import EditProfile from "../pages/user/editprofile/EditProfile";
-// import ChangePassWord from "../pages/user/changepassword/ChangePassWord";
+import EditProfile from "../pages/user/editprofile/EditProfile";
+import ChangePassWord from "../pages/user/changepassword/ChangePassWord";
 import ProductQr from "../pages/products/product_qr/ProductQr";
 const RoutesLayout = ({ rerender, setRerender }) => {
   const user = localStorage.getItem("user");
@@ -44,13 +44,15 @@ const RoutesLayout = ({ rerender, setRerender }) => {
       <Route path="/staffs">
         <Staff />
       </Route>
-      {/* <Route path="/editProfile">
+      <Route path="/editProfile">
         <EditProfile rerender={rerender} setRerender={setRerender} />
       </Route>
-
+      <Route path="/revenues">
+        <Revenues />
+      </Route>
       <Route path="/changePassWord">
         <ChangePassWord />
-      </Route> */}
+      </Route>
       <Route path="/returns">
         <Returns />
       </Route>
