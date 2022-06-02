@@ -11,10 +11,10 @@ import Returns from "../pages/returns/Returns";
 import Checkout from "../pages/sales/checkout/Checkout";
 import ReturnOrderDetail from "../pages/returns/return_order_detail/ReturnOrderDetail";
 import ReturnBill from "../pages/returns/return_bill/ReturnBill";
-import OrderDetail from "../pages/orders/OrderDetail/OrderDetail";
+import OrderDetail from "../pages/orders/orderdetail/OrderDetail";
 // import EditProfile from "../pages/user/editprofile/EditProfile";
 // import ChangePassWord from "../pages/user/changepassword/ChangePassWord";
-// import ProductQr from "../pages/products/product_qr/ProductQr";
+import ProductQr from "../pages/products/product_qr/ProductQr";
 const RoutesLayout = ({ rerender, setRerender }) => {
   const user = localStorage.getItem("user");
   console.log(user);
@@ -32,9 +32,9 @@ const RoutesLayout = ({ rerender, setRerender }) => {
       <Route path="/products">
         <Products />
       </Route>
-      {/* <Route path="/productQr">
+      <Route path="/productQr">
         <ProductQr />
-      </Route> */}
+      </Route>
       <Route path="/orders">
         <Orders />
       </Route>

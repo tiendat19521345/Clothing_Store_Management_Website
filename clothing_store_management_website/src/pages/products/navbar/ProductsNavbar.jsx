@@ -2,6 +2,9 @@ import React, { useState, useRef } from "react";
 import "./ProductsNavbar.css";
 import ModalUnstyled from "@mui/core/ModalUnstyled";
 import { styled } from '@mui/material/styles';
+import AddProduct from "../addProduct/AddProduct";
+import axios from "axios";
+import Dialog from "../../../components/dialog/Dialog";
 
 const StyledModal = styled(ModalUnstyled)`
   position: fixed;
@@ -50,10 +53,47 @@ const ProductsNavbar = ({ setRerenderProducts, handlePrint }) => {
     }
   };
   const handleImportFile = (e) => {
-    
+    const excelFileProducts = new FormData();
+    excelFileProducts.append("file", selectedFile);
+    axios
+      .post(
+        "https://clothesapp123.herokuapp.com/api/products/import",
+        excelFileProducts,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+      .then((res) => {
+        alert("Thêm danh sách sản phẩm thành công");
+        setRerenderProducts(true);
+        setShowDialogImport(false);
+        setShowExcelIcon(false);
+      })
+      .catch((err) => {
+        alert("Lỗi nhập hàng, vui lòng kiểm tra lại file excel");
+        setShowDialogImport(false);
+        setShowExcelIcon(false);
+      });
   };
   return (
     <div>
+      <div>
+        <StyledModal
+          aria-labelledby="unstyled-modal-title"
+          aria-describedby="unstyled-modal-description"
+          open={showFormAddProduct}
+          onClose={handleClose}
+          BackdropComponent={Backdrop}
+        >
+          <AddProduct
+            setRerenderProducts={setRerenderProducts}
+            setShowFormAddProduct={setShowFormAddProduct}
+          />
+        </StyledModal>
+      </div>
 
       <div className="row list-action-products-btn">
         <div
@@ -93,6 +133,13 @@ const ProductsNavbar = ({ setRerenderProducts, handlePrint }) => {
           )}
           <div onClick={handleShowModal}>Import</div>
         </div>
+        <Dialog
+          title="Import file sản phẩm từ file excel"
+          content="Bạn có muốn import file excel này"
+          open={showDialogImport}
+          handleAction={handleImportFile}
+          handleCancel={setShowDialogImport}
+        />
 
         <div
           onClick={() => {

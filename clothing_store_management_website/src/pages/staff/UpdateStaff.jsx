@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import "./UpdateStaff.css";
+
 import TextField from "@mui/material/TextField";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
@@ -26,7 +27,27 @@ const UpdateStaff = ({ staff, setStaff, setShowFormUpdateStaff }) => {
     formStaff.append("image", avatar);
 
     //post to API
-    
+    axios
+      .put(
+        `https://clothesapp123.herokuapp.com/api/users/updateUser/${staff._id}`,
+        formStaff,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "Access-Control-Allow-Origin": "*",
+          },
+        },
+        { timeout: 1000 }
+      )
+      .then((res) => {
+        alert("Cập nhật nhân viên thành công");
+        setShowFormUpdateStaff(false);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        alert("Cập nhật nhân viên thất bại");
+        //setShowFormUpdateStaff(false);
+      });
   };
   const { handleChange, handleChangeBirthday, handleSubmit, errors } =
     useFormStaff(submitForm, staff, setStaff, validateUpdateStaff);
