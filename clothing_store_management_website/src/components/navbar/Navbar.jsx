@@ -5,11 +5,20 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const NavBar = ({ rerender, currentTabIndex, setCurrentTabIndex }) => {
-
-
-
-
-
+  console.log(JSON.parse(localStorage.getItem("user")));
+  const userLocal = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState([]);
+  console.log(userLocal.userId);
+  useEffect(() => {
+    console.log(console.log("test"));
+    axios
+      .get(
+        `https://clothesapp123.herokuapp.com/api/users/getInfo/${userLocal.userId}`
+      )
+      .then((res) => {
+        setUser(res.data);
+      });
+  }, [rerender]);
   return (
     <div>
       <div className="navbar">
@@ -25,11 +34,14 @@ const NavBar = ({ rerender, currentTabIndex, setCurrentTabIndex }) => {
           className="navbar__right"
         >
           <Link
-           
+            to={{
+              pathname: "/editProfile",
+              state: { user },
+            }}
           >
             <div className="navbar__right-item">
-              <img src={cr7} alt="" />
-              <span>Dat 09</span>
+              <img src={user?.imageUrl} alt="" />
+              <span>{user.fullname}</span>
             </div>
           </Link>
         </div>

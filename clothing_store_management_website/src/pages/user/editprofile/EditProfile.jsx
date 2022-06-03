@@ -9,8 +9,9 @@ import axios from "axios";
 export default function EditProfile({ rerender, setRerender }) {
   let location = useLocation();
   let history = useHistory();
-  console.log(rerender);
+  console.log("Rerender:", rerender);
   const userLocal = location.state?.user;
+  console.log("location", location)
   const [user, setUser] = useState(userLocal);
   const [userUpdate, setUserUpdate] = useState({
     fullname: "",
