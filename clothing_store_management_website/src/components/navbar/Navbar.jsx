@@ -11,6 +11,7 @@ const NavBar = ({ rerender, currentTabIndex, setCurrentTabIndex }) => {
   console.log(userLocal.userId);
   useEffect(() => {
     console.log(console.log("test"));
+
     axios
       .get(
         `https://clothesapp123.herokuapp.com/api/users/getInfo/${userLocal.userId}`
