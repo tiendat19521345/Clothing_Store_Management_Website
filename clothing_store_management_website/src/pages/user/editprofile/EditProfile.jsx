@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Link, useLocation, useHistory } from "react-router-dom";
 import "./editprofile.css";
 import TextField from "@mui/material/TextField";
@@ -9,17 +9,27 @@ import axios from "axios";
 export default function EditProfile({ rerender, setRerender }) {
   let location = useLocation();
   let history = useHistory();
-  console.log("Rerender:", rerender);
   const userLocal = location.state?.user;
-  console.log("location", location)
-  const [user, setUser] = useState(userLocal);
+
+  const [user, setUser] = useState();
+  useEffect(() => {
+    axios
+      .get(
+        `https://clothesapp123.herokuapp.com/api/users/getInfo/${userLocal._id}`
+      )
+      .then((res) => {
+        console.log("get all data");
+        setUser(res.data);
+      });
+  }, []);
+
   const [userUpdate, setUserUpdate] = useState({
     fullname: "",
     phone: "",
     address: "",
     email: "",
 
-    birthday: user.birthday || new Date(),
+    birthday: user?.birthday || new Date(),
   });
   const [avatar, setAvatar] = useState("");
   const handleUpdateUser = (e) => {
@@ -110,31 +120,31 @@ export default function EditProfile({ rerender, setRerender }) {
       <div className="userContainer">
         <div className="userShow">
           <div className="userShowTop">
-            <img src={user.imageUrl} alt="" className="userShowImg" />
+            <img src={user?.imageUrl} alt="" className="userShowImg" />
             <div className="userShowTopTitle">
-              <span className="userShowUsername">{user.fullname}</span>
-              <span className="userShowUserTitle">{user.position}</span>
+              <span className="userShowUsername">{user?.fullname}</span>
+              <span className="userShowUserTitle">{user?.position}</span>
             </div>
           </div>
           <div className="userShowBottom">
             <span className="userShowTitle">Tài khoản</span>
             <div className="userShowInfo">
-              <span className="userShowInfoTitle">{user.username}</span>
+              <span className="userShowInfoTitle">{user?.username}</span>
             </div>
             <div className="userShowInfo">
               <span className="userShowInfoTitle">
-                {formatDate(user.birthday)}
+                {formatDate(user?.birthday)}
               </span>
             </div>
             <span className="userShowTitle">Liên hệ</span>
             <div className="userShowInfo">
-              <span className="userShowInfoTitle">{user.phone}</span>
+              <span className="userShowInfoTitle">{user?.phone}</span>
             </div>
             <div className="userShowInfo">
-              <span className="userShowInfoTitle">{user.email}</span>
+              <span className="userShowInfoTitle">{user?.email}</span>
             </div>
             <div className="userShowInfo">
-              <span className="userShowInfoTitle">{user.address}</span>
+              <span className="userShowInfoTitle">{user?.address}</span>
             </div>
           </div>
         </div>
@@ -147,9 +157,9 @@ export default function EditProfile({ rerender, setRerender }) {
                 <input
                   type="text"
                   name="fullname"
-                  value={userUpdate.fullname}
+                  value={userUpdate?.fullname}
                   onChange={handleUpdateUser}
-                  placeholder={user.fullname}
+                  placeholder={user?.fullname}
                   className="userUpdateInput"
                 />
               </div>
@@ -159,7 +169,7 @@ export default function EditProfile({ rerender, setRerender }) {
                   name="phone"
                   type="phone"
                   value={userUpdate.phone}
-                  placeholder={user.phone}
+                  placeholder={user?.phone}
                   onChange={(e) => {
                     const re = /^[0-9\b]+$/;
 
@@ -179,7 +189,7 @@ export default function EditProfile({ rerender, setRerender }) {
                 <input
                   type="email"
                   name="email"
-                  placeholder={user.email}
+                  placeholder={user?.email}
                   className="userUpdateInput"
                   value={userUpdate.email}
                   onChange={handleUpdateUser}
@@ -219,7 +229,7 @@ export default function EditProfile({ rerender, setRerender }) {
                 <label>Địa chỉ</label>
                 <input
                   type="text"
-                  placeholder={user.address || ""}
+                  placeholder={user?.address || ""}
                   name="address"
                   value={userUpdate.address}
                   className="userUpdateInput"
@@ -234,7 +244,7 @@ export default function EditProfile({ rerender, setRerender }) {
                     inputAvatarRef.current.click();
                   }}
                   className="userUpdateImg"
-                  src={avatar ? URL.createObjectURL(avatar) : user.imageUrl}
+                  src={avatar ? URL.createObjectURL(avatar) : user?.imageUrl}
                   alt=""
                 />
 
