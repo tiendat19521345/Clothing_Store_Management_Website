@@ -1,5 +1,5 @@
 # Clothing store management software - Phần mềm quản lý bán hàng trên website
-
+# Truy cập website tại đường dẫn:  https://theclothes.herokuapp.com
 ## Mục lục
 - [Chức năng](#chức-năng)
 - [Thư viện và công nghệ](#thư-viện-và-công-nghệ)
