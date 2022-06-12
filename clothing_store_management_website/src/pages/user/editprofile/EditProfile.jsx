@@ -18,7 +18,6 @@ export default function EditProfile({ rerender, setRerender }) {
         `https://clothesapp123.herokuapp.com/api/users/getInfo/${userLocal._id}`
       )
       .then((res) => {
-        console.log("get all data");
         setUser(res.data);
       });
   }, []);
