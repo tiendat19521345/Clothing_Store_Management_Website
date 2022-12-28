@@ -95,7 +95,7 @@ const Sales = () => {
   //get All cateogories
   useEffect(() => {
     axios
-      .get("https://clothesapp123.herokuapp.com/api/products/getAllCategories")
+      .get("http://localhost:5000/api/products/getAllCategories")
       .then((res) => {
         setCategories(res.data);
       });
@@ -104,7 +104,7 @@ const Sales = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/products/productByCategory",
+        "http://localhost:5000/api/products/productByCategory",
         {
           params: {
             category: categoryActive,
@@ -127,7 +127,7 @@ const Sales = () => {
   // get All customers
   useEffect(() => {
     axios
-      .get("https://clothesapp123.herokuapp.com/api/customers/list")
+      .get("http://localhost:5000/api/customers/list")
       .then((res) => {
         setCustomers(res.data);
       })

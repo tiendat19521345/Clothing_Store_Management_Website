@@ -45,7 +45,7 @@ const AddCustomer = ({ open, handleCancel }) => {
     //post to API
     axios
       .post(
-        "https://clothesapp123.herokuapp.com/api/customers/create",
+        "http://localhost:5000/api/customers/create",
         customer
       )
       .then((res) => {

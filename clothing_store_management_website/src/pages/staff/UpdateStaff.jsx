@@ -29,7 +29,7 @@ const UpdateStaff = ({ staff, setStaff, setShowFormUpdateStaff }) => {
     //post to API
     axios
       .put(
-        `https://clothesapp123.herokuapp.com/api/users/updateUser/${staff._id}`,
+        `http://localhost:5000/api/users/updateUser/${staff._id}`,
         formStaff,
         {
           headers: {

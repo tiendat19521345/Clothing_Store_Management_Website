@@ -15,7 +15,7 @@ const ProductQr = () => {
 
   useEffect(() => {
     axios
-      .get(`https://clothesapp123.herokuapp.com/api/products/listProduct`)
+      .get(`http://localhost:5000/api/products/listProduct`)
       .then((res) => {
         setProducts(res.data);
       })

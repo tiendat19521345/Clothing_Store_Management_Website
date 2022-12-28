@@ -21,7 +21,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/orders/revenue/revenueToday"
+        "http://localhost:5000/api/orders/revenue/revenueToday"
       )
       .then((res) => {
         setRevenueToday(res.data[0]?.total || 0);
@@ -30,7 +30,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/orders/revenue/getExpensiveToday"
+        "http://localhost:5000/api/orders/revenue/getExpensiveToday"
       )
       .then((res) => {
         setExpensiveToday(res.data[0]?.totalExpensive || 0);
@@ -39,7 +39,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/orders/revenue/getCountOrderToday"
+        "http://localhost:5000/api/orders/revenue/getCountOrderToday"
       )
       .then((res) => {
         setCountNumberToday(res.data[0]?.countOrder || 0);
@@ -49,7 +49,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/customers/getTopCustomerByPoint/1"
+        "http://localhost:5000/api/customers/getTopCustomerByPoint/1"
       )
       .then((res) => {
         setTop1Customer({
@@ -63,7 +63,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTotalCustomerByThisWeek"
+        "http://localhost:5000/api/orders/revenue/getTotalCustomerByThisWeek"
       )
       .then((res) => {
         const customerThisWeekDataSets = [0, 0, 0, 0, 0, 0, 0];
@@ -88,7 +88,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTotalCustomerByLastWeek"
+        "http://localhost:5000/api/orders/revenue/getTotalCustomerByLastWeek"
       )
       .then((res) => {
         const customerLastWeekDataSets = [0, 0, 0, 0, 0, 0, 0];
@@ -110,7 +110,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTopProductByRevenue/6"
+        "http://localhost:5000/api/orders/revenue/getTopProductByRevenue/6"
       )
       .then((res) => {
         setTopProductByRevenue(res.data);
@@ -120,7 +120,7 @@ const Dashboard = () => {
   useEffect(() => {
     axios
       .get(
-        "https://clothesapp123.herokuapp.com/api/orders/revenue/getTopProductByQuantity/6"
+        "http://localhost:5000/api/orders/revenue/getTopProductByQuantity/6"
       )
       .then((res) => {
         setTopProductByQuantity(res.data);

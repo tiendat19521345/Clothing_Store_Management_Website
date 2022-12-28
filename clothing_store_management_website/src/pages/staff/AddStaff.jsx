@@ -43,7 +43,7 @@ const AddStaff = ({ setShowFormAddStaff }) => {
     //post to API
     axios
       .post(
-        "https://clothesapp123.herokuapp.com/api/users/register",
+        "http://localhost:5000/api/users/register",
         formStaff,
         {
           headers: {

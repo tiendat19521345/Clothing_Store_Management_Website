@@ -15,7 +15,7 @@ export default function EditProfile({ rerender, setRerender }) {
   useEffect(() => {
     axios
       .get(
-        `https://clothesapp123.herokuapp.com/api/users/getInfo/${userLocal._id}`
+        `http://localhost:5000/api/users/getInfo/${userLocal._id}`
       )
       .then((res) => {
         console.log("get all data");
@@ -54,7 +54,7 @@ export default function EditProfile({ rerender, setRerender }) {
     //post to API
     axios
       .put(
-        `https://clothesapp123.herokuapp.com/api/users/updateUser/${user._id}`,
+        `http://localhost:5000/api/users/updateUser/${user._id}`,
         formStaff,
         {
           headers: {

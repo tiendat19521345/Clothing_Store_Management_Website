@@ -26,7 +26,7 @@ const AddProduct = ({ setRerenderProducts, setShowFormAddProduct }) => {
   //get All categories
   useEffect(() => {
     axios
-      .get("https://clothesapp123.herokuapp.com/api/products/getAllCategories")
+      .get("http://localhost:5000/api/products/getAllCategories")
       .then((res) => {
         console.log(res.data);
         setCategories(res.data);
@@ -126,7 +126,7 @@ const AddProduct = ({ setRerenderProducts, setShowFormAddProduct }) => {
     //post to API
     axios
       .post(
-        "https://clothesapp123.herokuapp.com/api/products/add",
+        "http://localhost:5000/api/products/add",
         formProduct,
         {
           headers: {

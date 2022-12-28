@@ -18,7 +18,7 @@ const UpdateProduct = ({ product, setProduct, setShowFormUpdateProduct }) => {
   //get All cateogories
   useEffect(() => {
     axios
-      .get("https://clothesapp123.herokuapp.com/api/products/getAllCategories")
+      .get("http://localhost:5000/api/products/getAllCategories")
       .then((res) => {
         setCategories(res.data);
       });
@@ -117,7 +117,7 @@ const UpdateProduct = ({ product, setProduct, setShowFormUpdateProduct }) => {
     //post to API
     axios
       .put(
-        `https://clothesapp123.herokuapp.com/api/products/updateProduct/${product._id}`,
+        `http://localhost:5000/api/products/updateProduct/${product._id}`,
         formProduct,
         {
           headers: {
