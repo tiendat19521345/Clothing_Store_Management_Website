@@ -180,7 +180,7 @@ const Orders = () => {
               .toLowerCase()
               .indexOf(customerName.toLowerCase()) >= 0 &&
             order.customer &&
-            order.user.fullname.indexOf(seller) >= 0
+            order.user?.fullname.indexOf(seller) >= 0
           );
         } else {
           return (
@@ -188,7 +188,7 @@ const Orders = () => {
             toDateTime > dateOrder.getTime() &&
             order._id.indexOf(orderId) >= 0 &&
             !customerName &&
-            order.user.fullname.indexOf(seller) >= 0
+            order.user?.fullname.indexOf(seller) >= 0
           );
         }
       });
