@@ -57,7 +57,7 @@ const ProductsNavbar = ({ setRerenderProducts, handlePrint }) => {
     excelFileProducts.append("file", selectedFile);
     axios
       .post(
-        "https://clothesapp123.herokuapp.com/api/products/import",
+        "http://localhost:5000/api/products/import",
         excelFileProducts,
         {
           headers: {

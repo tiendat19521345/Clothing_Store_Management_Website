@@ -47,7 +47,7 @@ const Checkout = () => {
       }),
     };
     axios
-      .post("https://clothesapp123.herokuapp.com/api/orders", { ...orderApi })
+      .post("http://localhost:5000/api/orders", { ...orderApi })
       .then((res) => {
         setQrImage(res.data.qrCodeUrl);
         setOrderId(res.data._id);

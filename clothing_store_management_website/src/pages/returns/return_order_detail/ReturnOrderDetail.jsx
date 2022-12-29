@@ -17,7 +17,7 @@ const ReturnOrderDetail = () => {
   });
   useEffect(() => {
     axios
-      .get(`https://clothesapp123.herokuapp.com/api/orders/${orderId}`)
+      .get(`http://localhost:5000/api/orders/${orderId}`)
       .then((res) => {
         setOrder(res.data);
         setReturnOrder({

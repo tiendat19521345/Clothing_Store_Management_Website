@@ -22,7 +22,7 @@ const ChangePassWord = () => {
 
     //post to API
     axios
-      .post("https://clothesapp123.herokuapp.com/api/users/changePass", user)
+      .post("http://localhost:5000/api/users/changePass", user)
       .then((res) => {
         alert("Cập nhật mật khẩu thành công");
       })

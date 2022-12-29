@@ -89,7 +89,7 @@ const Orders = () => {
 
   useEffect(() => {
     axios
-      .get("https://clothesapp123.herokuapp.com/api/orders/list")
+      .get("http://localhost:5000/api/orders/list")
       .then((res) => {
         setOrders(
           res.data.filter(
