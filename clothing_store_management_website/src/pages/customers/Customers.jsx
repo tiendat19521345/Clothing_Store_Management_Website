@@ -80,7 +80,7 @@ const Customers = () => {
   useEffect(async () => {
     console.log("Chạy USe effect");
     await axios
-      .get("https://clothingshopapp.herokuapp.com/api/customers/list")
+      .get("http://localhost:5000/api/customers/list")
       .then(async (res) => {
         console.log(res.data);
         CalculateTotalPrice(res.data);

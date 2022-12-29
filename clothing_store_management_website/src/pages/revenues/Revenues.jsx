@@ -174,7 +174,7 @@ const Revenues = () => {
   }
   useEffect(async () => {
     await axios
-      .get("https://clothingshopapp.herokuapp.com/api/orders/list")
+      .get("http://localhost:5000/api/orders/list")
       .then(async (res) => {
         setOrders(res.data);
         setDataRevenueByMonthYear(
@@ -191,7 +191,7 @@ const Revenues = () => {
 
   async function ReturnReport() {
     await axios
-      .get("https://clothingshopapp.herokuapp.com/api/products/return")
+      .get("http://localhost:5000/api/products/return")
       .then(async (res) => {
         setReportProduct(res.data);
       })
@@ -201,7 +201,7 @@ const Revenues = () => {
   }
   async function SellProductReport() {
     await axios
-      .get("https://clothingshopapp.herokuapp.com/api/products/sell")
+      .get("http://localhost:5000/api/products/sell")
       .then(async (res) => {
         setReportProduct(res.data);
       })
@@ -213,7 +213,7 @@ const Revenues = () => {
     console.log(fromDate);
     console.log(toDate);
     await axios
-      .post("https://clothingshopapp.herokuapp.com/api/products/sellbyDate", {
+      .post("http://localhost:5000/api/products/sellbyDate", {
         fromDate: fromDate,
         toDate: toDate,
       })
